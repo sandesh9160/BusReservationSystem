@@ -1,7 +1,7 @@
-# Bus Reservation System
+# Online Bus Ticket Reservation System
 
 ## Overview
-The **Bus Reservation System** is a web-based application built with Django to manage bus reservations efficiently. The system allows users to view bus schedules, book tickets, and manage their reservations through an intuitive interface.
+The **Online Bus  Ticket Reservation System** is a web-based application built with Django to manage bus reservations efficiently. The system allows users to view bus schedules, book tickets, and manage their reservations through an intuitive interface.
 
 ## Features
 - **User Authentication**: Secure login and registration for users.
