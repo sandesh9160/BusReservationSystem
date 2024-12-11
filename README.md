@@ -33,30 +33,39 @@ BUS_3.1/ |— db.sqlite3 # Database file |— manage.py # Django management scri
    git clone <repository-url>
    cd BUS_3.1    <br>
 2.**Set up a virtual environment (optional)**: <br>
+
 python -m venv venv      <br>
 source venv/bin/activate  # On Windows: venv\Scripts\activate  <br>
+
 3.**Install dependencies**:    <br>
+
 pip install -r requirements.txt   <br>
 
 4.**Apply migrations:**   <br>
+
 python manage.py migrate   <br>
 
 5.**Run the development server**:  <br>
+
 python manage.py runserver     <br>
  
 6.**Access the application**: Open your browser and go to **http://127.0.0.1:8000/**.
 
 **Usage**<br>
+
 Register as a new user or log in if you already have an account. <br>
 Explore bus schedules and make reservations. <br>
 Admins can log in to manage buses, routes, and users.<br>
-**Contributing**<br>
-Contributions are welcome! Please follow these steps: <br>
 
+**Contributing**<br>
+
+Contributions are welcome! Please follow these steps: <br>
 Fork the repository. <br>
 Create a new branch for your feature (git checkout -b feature-name). <br>
 Commit your changes (git commit -m 'Add feature'). <br>
 Push to the branch (git push origin feature-name). <br>
 Create a pull request.<br>
+
 **License** <br>
+
 This project is licensed under the MIT License. See the LICENSE file for details.
