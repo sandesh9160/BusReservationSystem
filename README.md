@@ -37,11 +37,15 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 3.**Install dependencies**:
 pip install -r requirements.txt
+
 4.**Apply migrations:**
 python manage.py migrate
+
 5.**Run the development server**:
 python manage.py runserver
+
 6.**Access the application**: Open your browser and go to **http://127.0.0.1:8000/**.
+
 **Usage**
 Register as a new user or log in if you already have an account.
 Explore bus schedules and make reservations.
@@ -50,9 +54,9 @@ Admins can log in to manage buses, routes, and users.
 Contributions are welcome! Please follow these steps:
 
 Fork the repository.
-Create a new branch for your feature (git checkout -b feature-name).
-Commit your changes (git commit -m 'Add feature').
-Push to the branch (git push origin feature-name).
+Create a new branch for your feature (git checkout -b feature-name). <br>
+Commit your changes (git commit -m 'Add feature'). <br>
+Push to the branch (git push origin feature-name). <br>
 Create a pull request.
 **License**
 This project is licensed under the MIT License. See the LICENSE file for details.
