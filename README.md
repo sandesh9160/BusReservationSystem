@@ -28,22 +28,22 @@ BUS_3.1/ |— db.sqlite3 # Database file |— manage.py # Django management scri
 - Virtual environment tool (optional but recommended)
 
 ### Steps
-1. **Clone the repository**:
+1. **Clone the repository**: <br>
    ```bash
    git clone <repository-url>
-   cd BUS_3.1
-2.**Set up a virtual environment (optional)**:
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-3.**Install dependencies**:
-pip install -r requirements.txt
+   cd BUS_3.1    <br>
+2.**Set up a virtual environment (optional)**: <br>
+python -m venv venv      <br>
+source venv/bin/activate  # On Windows: venv\Scripts\activate  <br>
+3.**Install dependencies**:    <br>
+pip install -r requirements.txt   <br>
 
-4.**Apply migrations:**
-python manage.py migrate
+4.**Apply migrations:**   <br>
+python manage.py migrate   <br>
 
-5.**Run the development server**:
-python manage.py runserver
-
+5.**Run the development server**:  <br>
+python manage.py runserver     <br>
+ 
 6.**Access the application**: Open your browser and go to **http://127.0.0.1:8000/**.
 
 **Usage**<br>
