@@ -1,0 +1,130 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+    <div class="container glass-container">
+      <h2 class="text-center">Your Feedback Matters!</h2>
+      <div class="row">
+        <div class="offset-md-3 col-md-6">
+          <form method="POST">
+            {% csrf_token %}
+            <label>Enter Your Name:</label>
+            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+
+            <label>Enter Your Email:</label>
+            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+
+            <label>Rate Your Bus Travel Experience:</label>
+            <select name="rating" class="form-control" required>
+              <option value="" disabled selected>Choose Rating</option>
+              <option value="1">1 - Very Poor</option>
+              <option value="2">2 - Poor</option>
+              <option value="3">3 - Average</option>
+              <option value="4">4 - Good</option>
+              <option value="5">5 - Excellent</option>
+            </select>
+
+            <label>Bus Number (Optional):</label>
+            <input type="text" name="bus_number" class="form-control" placeholder="Bus Number">
+
+            <label>Write Your Feedback:</label>
+            <textarea name="feedback" class="form-control" rows="4" placeholder="Your Comments..." required></textarea>
+
+            <div class="text-center mt-3">
+              <input type="submit" value="Submit Feedback" class="btn btn-success">
+              <input type="reset" value="Clear" class="btn btn-danger"> <br>
+              <a href="{% url 'home' %}" class="btn btn-primary mt-2 btn-block">Go to Main Page</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <style>
+      /* Glass effect container */
+      .glass-container {
+        background: rgba(255, 255, 255, 0.001);
+        border-radius: 15px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      h2 {
+        color: #fff;
+        margin-bottom: 30px;
+      }
+
+      .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        padding: 10px;
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:hover,
+      .form-control:focus {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #fff;
+      }
+
+      label {
+        color: #fff;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-success {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Hover colors for buttons */
+      .btn-success:hover {
+        background-color: #218838;
+      }
+
+      .btn-danger:hover {
+        background-color: #c82333;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+
+      /* Animation for form load */
+      .glass-container {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.5s forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+{% endblock %}

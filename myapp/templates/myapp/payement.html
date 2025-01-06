@@ -1,0 +1,163 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-sm" style="background-color: rgba(255, 255, 255, 0.7);"> <!-- Transparent card -->
+        <div class="card-body">
+            <h2 class="text-center">Payment Page</h2>
+            <form  method="POST" id="payment-form"action="{% url 'payment_success' booking.id %}"> <!-- Proper form submission -->
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Full Name <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span style="color: red;">*</span></label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="card-number" name="card_number" placeholder="xxxx-xxxx-xxxx-xxxx" required pattern="\d{4}-\d{4}-\d{4}-\d{4}"required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="expiry-date" name="expiry_date" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/\d{2}"required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cvv">CVV <span style="color: red;">*</span></label>
+                            <input type="password" class="form-control" id="cvv" name="cvv" placeholder="xxx" required pattern="\d{3}"required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Travel Insurance Checkbox -->
+                <div class="form-group">
+                    <input type="checkbox" id="insurance" name="insurance" value="yes" onclick="updateAmount()">
+                    <label for="insurance">Do you want travel insurance (5% extra)?</label>
+                </div>
+
+                <!-- Amount Field -->
+                <div class="form-group">
+                    <label for="amount">Amount <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="amount" name="amount" value="{{ total_amount }}" readonly>
+                </div>
+                    <button type="submit" class="btn btn-success btn-block" onclick="submitForm()">Pay Now</button>
+                 <!-- Link that submits the form -->
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+  /* Global Styles */
+body {
+    background-color: rgba(255,255,255,0.01); /* Slightly dark background */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Card Styles */
+.card {
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.01); /* Transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Header Styling */
+.card-body h2 {
+    color: #333; /* Darker text for visibility */
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Form Field Styles */
+.form-group label {
+    color: #333;
+    font-weight: 500;
+}
+
+.form-control {
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.03); /* Green glow */
+    outline: none;
+}
+
+/* Button Styling */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top:15px;
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Darker green on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9); /* Shadow on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .card {
+        margin-top: 30px;
+    }
+    .btn-success {
+        font-size: 16px;
+    }
+}
+
+</style>
+
+<script>
+    // Script to update the amount when insurance is selected
+    function updateAmount() {
+        let baseAmount = parseFloat("{{ total_amount }}");
+        let insuranceCheckbox = document.getElementById('insurance');
+        let amountField = document.getElementById('amount');
+
+        if (insuranceCheckbox.checked) {
+            let extraAmount = baseAmount * 0.05; // 5% extra
+            amountField.value = (baseAmount + extraAmount).toFixed(2); // Update amount
+        } else {
+            amountField.value = baseAmount.toFixed(2); // Reset to original amount
+        }
+    }
+    function submitForm() {
+        // Optionally, you can add validations or additional logic here
+        document.getElementById("paymentForm").submit(); // Submit the form
+    }
+
+</script>
+{% endblock %}

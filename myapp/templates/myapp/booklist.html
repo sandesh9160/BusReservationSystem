@@ -1,0 +1,165 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <!-- Flash Messages -->
+    {% for message in messages %}
+    {% if message.tags %}
+    <div class="alert alert-{{ message.tags }} fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <!-- Bookings List -->
+    <div class="card glass-card mb-4">
+        <div class="card-header bg-primary text-light">
+            <h3 class="mb-0">List of Bookings</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-glass">
+                    <thead>
+                        <tr class="text-light">
+                            <th class="text-center">BOOKING ID</th>
+                            <th class="text-center">USER NAME</th>
+                            <th class="text-center">BUS NAME</th>
+                            <th class="text-center">SOURCE</th>
+                            <th class="text-center">DESTINATION</th>
+                            <th class="text-center">NUM OF SEATS</th>
+                            <th class="text-center">PRICE</th>
+                            <th class="text-center">DATE</th>
+                            <th class="text-center">TIME</th>
+                            <th class="text-center">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in book_list %}
+                        <tr class="fade-in">
+                            <td class="text-center">{{ row.id }}</td>
+                            <td class="text-center">{{ row.name }}</td>
+                            <td class="text-center">{{ row.bus_name }}</td>
+                            <td class="text-center">{{ row.source }}</td>
+                            <td class="text-center">{{ row.dest }}</td>
+                            <td class="text-center">{{ row.nos }}</td>
+                            <td class="text-center">{{ row.price }}</td>
+                            <td class="text-center">{{ row.date }}</td>
+                            <td class="text-center">{{ row.time }}</td>
+                            <td class="text-center">{{ row.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancellation Form -->
+    <div class="row mt-4 justify-content-center">
+        <div class="col-lg-5 col-md-7 col-sm-10 col-xs-12">
+            <div class="card glass-card">
+                <div class="card-header bg-danger text-light">
+                    <h3 class="mb-0">Cancel Booking Form</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'cancellings' %}" method="post" id="cancel-form">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="bus_id" class="form-label">Booking ID</label>
+                            <input name='bus_id' class="form-control rounded-0 glass-input" type="number" id="bus_id" required>
+                        </div>
+                        {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-danger w-100 rounded-0" form="cancel-form">Cancel Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Glassmorphism Styling */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 20px;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .table-glass {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .table-glass thead {
+        background: rgba(0, 0, 0, 0.6);
+        color: #ffffff;
+    }
+
+    .table-glass tbody tr {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .table-glass tbody td {
+        border: none;
+    }
+
+    .glass-input {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+    }
+
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Button and Alert Styling */
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    /* Alert Styles */
+    .alert {
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        font-weight: 500;
+    }
+
+    /* Responsive Table */
+    .table-responsive {
+        overflow-x: auto;
+    }
+</style>
+
+{% endblock %}

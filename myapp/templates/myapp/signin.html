@@ -1,0 +1,117 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="card bg-gradient" style="background: linear-gradient(135deg, #4fc3f7, #0288d1);">
+        <div class="card-body text-center">
+            <h2 class="my-3 text-light">
+                <span class="scrolling-text">Welcome to PSS Corporation Bus Reservation</span>
+            </h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-5 col-md-7 col-sm-10 col-xs-12">
+            <div class="card shadow-lg border-0 glass-card rounded-3">
+                <div class="card-header bg-primary text-white text-center rounded-3">
+                    <div class="card-title h3 fw-bold mb-0 stylish-title">Login</div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <form action="{% url 'signin' %}" method="post" id="signin-form">
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <label for="username" class="control-label text-dark">Username:</label>
+                                <input name='name' class="form-control input-glass rounded-pill" type="text" id="username" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="control-label text-dark">Password:</label>
+                                <input name='password' id="password" class="form-control input-glass rounded-pill" type="password" required>
+                            </div>
+                        </form>
+                        <p class="text-dark">{{error}}</p>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-sm rounded-pill btn-primary btn-block w-100"
+                            style="transition: background-color 0.3s ease-in-out;"
+                            form="signin-form"
+                            onmouseover="this.style.backgroundColor='#0277bd'"
+                            onmouseout="this.style.backgroundColor='#0288d1'">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Glassmorphism effect */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .input-glass {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #333;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .input-glass:focus {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.02);
+        outline: none;
+    }
+
+    /* Scrolling text animation */
+    .scrolling-text {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: scroll-left 10s linear infinite;
+    }
+
+    @keyframes scroll-left {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    /* Hover animation for input fields */
+    .input-glass:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Button hover and active effects */
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button:active {
+        transform: scale(0.98);
+        box-shadow: none;
+    }
+    stylish-title {
+        font-size: 2rem; /* Increase font size */
+        font-weight: 700; /* Make the font bold */
+        background: linear-gradient(45deg, #ff6f61, #d32f2f);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text; /* Ensure compatibility with WebKit browsers */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        transition: transform 0.3s ease-in-out, letter-spacing 0.3s ease-in-out; /* Smooth animation */
+    }
+
+    .stylish-title:hover {
+        transform: scale(1.05); /* Slight zoom effect on hover */
+        letter-spacing: 2px; /* Add letter spacing for elegance */
+    }
+</style>
+{% endblock %}

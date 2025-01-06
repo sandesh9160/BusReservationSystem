@@ -1,0 +1,120 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7 col-sm-10 col-xs-12">
+            <div class="card rounded-0 shadow-lg glass-card" style="animation: fadeInUp 1s;">
+                <div class="card-header text-white glass-header">
+                    <div class="card-title text-center h3 mb-0 glow-title" style="animation: textGlow 1.5s infinite;">Registration</div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <form action="{% url 'signup' %}" method="post" id="registration-form">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="email" class="control-label">Email:</label>
+                                <input name="email" class="form-control input-glass rounded-pill" type="text" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="control-label">Username:</label>
+                                <input name="name" id="name" class="form-control input-glass rounded-pill" type="text" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="control-label">Password:</label>
+                                <input name="password" id="password" class="form-control input-glass rounded-pill" type="password" required>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-glass rounded-pill w-100" form="registration-form">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Glassmorphism effect for the card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+        backdrop-filter: blur(15px); /* Blurring the background */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    /* Glassmorphism effect for header */
+    .glass-header {
+        background: rgba(106, 17, 203, 0.2); /* Semi-transparent gradient */
+        backdrop-filter: blur(20px); /* Blur effect */
+    }
+
+    /* Glowing title effect */
+    .glow-title {
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Input fields with glassmorphism */
+    .input-glass {
+        background: rgba(255, 255, 255, 0.1); /* Light transparency */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+        color: #333; /* Text color */
+        transition: border-color 0.3s ease-in-out, transform 0.3s ease; /* Smooth transitions */
+        backdrop-filter: blur(10px); /* Background blur */
+    }
+
+    .input-glass:focus {
+        border-color: #007bff; /* Blue border on focus */
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Shadow effect on focus */
+        transform: scale(1.02); /* Slight scaling on focus */
+        outline: none;
+    }
+
+    /* Glass-like button */
+    .btn-glass {
+        background: rgba(0, 123, 255, 0.3); /* Semi-transparent button */
+        border: 1px solid rgba(0, 123, 255, 0.4); /* Button border */
+        color: text;
+        padding: 0.6rem 1.2rem;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    }
+
+    .btn-glass:hover {
+        background: rgba(0, 123, 255, 0.3); /* Darker blue on hover */
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Shadow on hover */
+    }
+
+    /* Animation for fading in the card */
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Animation for text glow effect */
+    @keyframes textGlow {
+        0% {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        100% {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    /* Styling for black labels */
+    .control-label {
+        font-weight: bold;
+        color:black; /* Light label color to contrast the form */
+    }
+
+</style>
+{% endblock %}

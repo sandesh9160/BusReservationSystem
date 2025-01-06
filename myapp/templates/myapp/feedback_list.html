@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center">Customer Feedback</h2>
+    <table class="table table-bordered table-hover mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Bus Number</th>
+                <th>Feedback</th>
+                <th>Submitted On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.name }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.get_rating_display }}</td>
+                    <td>{{ feedback.bus_number }}</td>
+                    <td>{{ feedback.feedback }}</td>
+                    <td>{{ feedback.submitted_on }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No feedback available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

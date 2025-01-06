@@ -1,0 +1,147 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="alert alert-success rounded-0 my-3 glassmorphism">
+        <h3 class="mb-0">Please Check Your details Once!!!!</h3>
+    </div>
+    <div class="text-center">
+        <form action="{% url 'seebookings' %}" method="post">
+            {% csrf_token %}
+            <button type="button" class="btn glassmorphism-button col-lg-4 col-md-5 col-sm-6 col-xs-6"
+                data-bs-toggle="modal" data-bs-target="#myModal">
+                Details
+            </button>
+            <button type="submit" class="btn glassmorphism-button col-lg-4 col-md-5 col-sm-6 col-xs-6">OK</button>
+        </form>
+    </div>
+</div>
+
+<!-- The Modal -->
+<!-- Modal Structure -->
+<div class="fade modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glassmorphism-modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="text-primary">Booking Details</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body glassmorphism-modal-body">
+                <ul class="list-group glassmorphism-list">
+                    <li class="list-group-item glassmorphism-list-item"><b>Bus name:</b> {{book.bus_name}}</li>
+                    <li class="list-group-item glassmorphism-list-item"><b>Starting point:</b> {{book.source}}</li>
+                    <li class="list-group-item glassmorphism-list-item"><b>Destination point:</b> {{book.dest}}</li>
+                    <li class="list-group-item glassmorphism-list-item"><b>Number of seats:</b> {{book.nos}}</li>
+                    <li class="list-group-item glassmorphism-list-item"><b>Date:</b> {{book.date}}</li>
+                    <li class="list-group-item glassmorphism-list-item"><b>Time:</b> {{book.time}}</li>
+                </ul>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer glassmorphism-modal-footer">
+                <a href="{% url 'payement' book.id %}" class="btn btn-primary glassmorphism-button">Make Payment</a>
+                <button type="button" class="btn btn-default glassmorphism-button" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+  /* General Glassmorphism Styling with reduced blur */
+  .glassmorphism {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 20px;
+  }
+
+  /* Modal content adjustments */
+  .glassmorphism-modal {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .glassmorphism-modal-content {
+      background-color: rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 20px;
+  }
+
+  /* Modal Body adjustments */
+  .glassmorphism-modal-body {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      padding: 20px;
+      color: #333; /* For better readability */
+  }
+
+  /* Buttons with distinct hover effect */
+  .glassmorphism-button {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease-in-out, box-shadow 0.2s;
+      padding: 10px 15px;
+      color: #000;
+  }
+
+  .glassmorphism-button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+  }
+
+  /* List items styling */
+  .glassmorphism-list-item {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 10px;
+      color: #333;
+  }
+
+  /* Blue "Make Payment" button */
+  .glassmorphism-modal-footer .btn-primary {
+      background-color: #007bff; /* Blue color */
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease-in-out;
+  }
+
+  .glassmorphism-modal-footer .btn-primary:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 91, 187, 0.5); /* Add a soft blue shadow */
+  }
+
+  /* Red "Close" button */
+  .glassmorphism-modal-footer .btn-default {
+      background-color: #dc3545; /* Red color */
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease-in-out;
+  }
+
+  .glassmorphism-modal-footer .btn-default:hover {
+      background-color: #c82333; /* Darker red on hover */
+      color: white;
+      box-shadow: 0 4px 12px rgba(200, 35, 51, 0.5); /* Add a soft red shadow */
+  }
+
+</style>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+{% endblock %}

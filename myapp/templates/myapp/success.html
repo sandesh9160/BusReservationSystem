@@ -1,0 +1,66 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-lg glass-card">
+                <div class="card-body text-center">
+                    <h2 class="card-title mb-4 text-light">Sign In Successful</h2>
+                    <p class="card-text">Hello {{ user }}, you have been successfully logged in. Your ID is {{ id }}.</p>
+                    <form action="{% url 'signout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-glass">Sign Out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Glassmorphism effect */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.5); /* Transparent card background */
+        backdrop-filter: blur(12px); /* Blurred background */
+        border-radius: 15px; /* Rounded corners */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Slight border for effect */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    /* Title Styling */
+    .card-title {
+        font-size: 1.75rem;
+        font-weight: bold;
+        color: black; /* Text color */
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+    }
+
+    /* Text Styling */
+    .card-text {
+        font-size: 1.1rem;
+        color: black;
+        backdrop-filter: blur(10px);
+    }
+
+    /* Glass-like button */
+    .btn-glass {
+        border: 1px solid rgba(40, 167, 69, 0.3); /* Border to match glass effect */
+        color: black; /* Text color */
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px; /* Fully rounded button */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Button hover and active effects */
+    .btn-glass:hover {
+        background-color: rgba(33, 136, 56, 0.3); /* Darken on hover */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    }
+
+    .btn-glass:active {
+        background-color: rgba(33, 136, 56, 0.4);
+        box-shadow: none;
+    }
+
+</style>
+{% endblock %}

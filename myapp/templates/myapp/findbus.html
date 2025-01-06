@@ -1,0 +1,104 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+            <div class="card shadow-sm rounded-3 glassmorphism animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="card-header bg-transparent text-black glass-header">
+                    <div class="card-title h3 mb-0">Find Bus</div>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'findbus' %}" method="post" id="find-form">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="source" class="form-label text-black">From</label>
+                            <input name="source" class="form-control rounded-0 glass-input stylish-border" type="text" id="source" value="{% if data.source %}{{data.source}}{% endif %}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="destination" class="form-label text-black">Destination</label>
+                            <input name="destination" id="destination" class="form-control rounded-0 glass-input stylish-border" type="text" value="{% if data.destination %}{{data.destination}}{% endif %}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label text-black">Date</label>
+                            <input name="date" id="date" class="form-control rounded-0 glass-input stylish-border" type="date" value="{% if data.date %}{{data.date}}{% endif %}" required>
+                        </div>
+                        {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary w-100 rounded-0 glass-button" form="find-form">Find</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Glassmorphism style */
+    .glassmorphism {
+        background: rgba(255, 255, 255,0.01);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        border-radius: 10px;
+    }
+
+    .glass-header {
+        background: rgba(255, 255, 255,0.01);
+        border-bottom: 1px solid rgba(255, 255, 255,0.9);
+        color:black!important;
+    }
+
+    .glass-input {
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: 20px !important; /* Apply a smooth and stylish border-radius */
+    padding: 10px; /* Ensure proper padding for a cleaner look */
+    color:black;
+    font-weight:200px;
+    transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on border and shadow */
+}
+
+.glass-input:focus {
+    outline: none;
+    border: 2px solid rgba(31, 58, 147, 0.2); /* Focus effect with a solid border */
+    box-shadow: 0 0 10px rgba(31, 58, 147, 0.1); /* Glow effect on focus */
+}
+
+
+    /* Stylish Input Borders */
+    .stylish-border {
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        border-radius: 25px; /* Smooth and rounded borders */
+        transition: border 0.3s ease;
+    }
+
+
+
+    /* Button and hover effect */
+    .glass-button {
+        background: rgba(31, 58, 147, 0.4++);
+        border: none;
+        transition: background-color 0.3s ease;
+        border-radius: 20px !important;
+    }
+
+    .glass-button:hover {
+        background: rgba(31, 58, 147, 1);
+    }
+
+    /* Additional Styling */
+    .form-label {
+        color: black!important; /* Set labels and header text to black */
+    }
+
+    /* Animation */
+    .animate__fadeInUp {
+        animation-duration: 1s;
+    }
+</style>
+{% endblock %}

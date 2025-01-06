@@ -1,0 +1,90 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h2 class="text-success">Payment Successful!</h2>
+            <p class="lead">Thank you for your payment. Your transaction was successful.</p>
+            <div class="animation-wrapper">
+                <div class="animation">
+                    <div class="checkmark">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" class="checkmark-svg">
+                            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                            <path class="checkmark-check" fill="none" d="M14 27l7 7 13-13"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'download_ticket' booking.id %}" class="btn btn-primary mt-4">Download Ticket</a>
+            <br>
+            <a href="{% url 'feedback' booking.id %}" class="btn btn-outline-secondary mt-3">Give Feedback</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        margin-top: 50px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.01);
+        text-align: center;
+    }
+
+    .animation-wrapper {
+        margin: 20px auto;
+        width: 100px;
+        height: 100px;
+    }
+
+    .animation {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+    }
+
+    .checkmark-svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .checkmark-circle {
+        stroke: #4CAF50;
+        stroke-width: 2;
+        stroke-dasharray: 157;
+        stroke-dashoffset: 157;
+        animation: checkmark-circle 0.6s ease-in-out forwards;
+    }
+
+    .checkmark-check {
+        stroke: #4CAF50;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: checkmark-check 0.6s 0.3s ease-in-out forwards;
+    }
+
+    @keyframes checkmark-circle {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes checkmark-check {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+</style>
+{% endblock %}

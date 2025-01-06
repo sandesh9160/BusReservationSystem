@@ -1,0 +1,141 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h3 class="text-center mb-4">{{ msg }}</h3>
+
+    <div class="card shadow-sm glass-card rounded-3 mb-5 animate__animated animate__fadeIn">
+        <div class="card-header bg-primary text-light glass-header">
+            <div class="card-title h3 mb-0">List of Scheduled Buses</div>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="bg-primary text-light glass-header">
+                            <th class="p-2 text-center">ID</th>
+                            <th class="p-2 text-center">Name</th>
+                            <th class="p-2 text-center">Source</th>
+                            <th class="p-2 text-center">Destination</th>
+                            <th class="p-2 text-center">Num of Seats</th>
+                            <th class="p-2 text-center">Seats Remaining</th>
+                            <th class="p-2 text-center">Price</th>
+                            <th class="p-2 text-center">Date</th>
+                            <th class="p-2 text-center">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in bus_list %}
+                        <tr class="animate__animated animate__fadeIn animate__delay-1s glass-row">
+                            <td class="align-middle text-center">{{ row.id }}</td>
+                            <td class="align-middle text-center">{{ row.bus_name }}</td>
+                            <td class="align-middle text-center">{{ row.source }}</td>
+                            <td class="align-middle text-center">{{ row.dest }}</td>
+                            <td class="align-middle text-center">{{ row.nos }}</td>
+                            <td class="align-middle text-center">{{ row.rem }}</td>
+                            <td class="align-middle text-center">{{ row.price }}</td>
+                            <td class="align-middle text-center">{{ row.date }}</td>
+                            <td class="align-middle text-center">{{ row.time }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+            <div class="card shadow-sm glass-card rounded-3 animate__animated animate__fadeIn animate__delay-2s">
+                <div class="card-header text-light glass-header">
+                    <div class="card-title h3 mb-3">Booking Form</div>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'bookings' %}" method="post" id="book-form">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="bus_id" class="form-label">Enter Bus ID</label>
+                            <input name='bus_id' class="form-control glass-input rounded-input" type="number" id="bus_id" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_seats" class="form-label">Number of Seats</label>
+                            <input name='no_seats' class="form-control glass-input rounded-input" id="no_seats" type="number" required>
+                        </div>
+                        {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary glass-button w-100 rounded-input" form="book-form">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Glassmorphism Style */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.38);
+        border: 1px solid rgba(255, 255, 255,0.3);
+        box-shadow: 0 8px 32px rgba(31, 38, 135,0.1);
+        color:black;
+    }
+
+    .glass-header {
+        background: rgba(0, 123, 255); /* Soft transparent color for headers */
+    }
+
+    /* Rounded Input Fields */
+    .rounded-input {
+        border-radius: 20px;
+    }
+
+    .glass-input {
+        background: rgba(255, 255, 255,0.01);
+        border: 1px solid rgba(255, 255, 255);
+        padding: 10px;
+        color: #000;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+        backdrop-filter: blur(5px);
+    }
+
+    .glass-input:focus {
+        border: 2px solid rgba(0, 123, 255);
+        box-shadow: 0 0 10px rgba(0, 123, 255);
+        outline: none;
+    }
+
+    .glass-button {
+        background: rgba(0, 123, 255);
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .alert {
+        border-radius: 0.5rem;
+    }
+
+    /* Card hover effect */
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Hover Effect */
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    /* Animation library: Animate.css */
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+</style>
+
+{% endblock %}
